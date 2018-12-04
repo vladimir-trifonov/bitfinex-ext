@@ -1,12 +1,6 @@
 import { handleActions } from 'redux-actions'
 
-export default handleActions(
-  {
-    INIT: (
-      state
-    ) => {
-      return { ...state };
-    }
-  },
+export const tickers = handleActions(
+  { },
   []
 )

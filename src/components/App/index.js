@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './App.css'
@@ -12,7 +12,10 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <Route exact path="/" component={Dashboard} />
+          <Fragment>
+            <Route exact path="/" component={Dashboard} />
+            <Route path="/tickers" component={Dashboard} />
+          </Fragment>
         </Router>
       </Provider>
     )
