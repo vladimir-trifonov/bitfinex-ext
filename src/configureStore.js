@@ -7,7 +7,7 @@ import { defaultState } from './defaultState'
 
 const __DEV__ = process.env.NODE_ENV === 'development'
 
-export default () => {
+export default function () {
   const sagaMiddleware = createSagaMiddleware()
   const middleWares = [sagaMiddleware]
   

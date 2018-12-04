@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 
-import configureStore from '../configureStore'
+import configureStore from '../../configureStore'
 import { Provider } from 'react-redux'
 
 const store = configureStore()
