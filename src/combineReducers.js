@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux'
-import  * as reducers from './reducers'
+import  { tickers } from './reducers'
 
-export const reducer = combineReducers({})
+export const reducer = combineReducers({
+  tickers
+})
