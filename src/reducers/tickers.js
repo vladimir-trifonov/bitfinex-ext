@@ -1,8 +1,8 @@
 import { handleActions } from 'redux-actions'
-import { tickersLoaded } from '../actions'
+import { tickersFetchedOkAction } from '../actions'
 
 export const tickers = handleActions({
-  [tickersLoaded]: (state, action) => ({
+  [tickersFetchedOkAction]: (state, action) => ({
     tickers: action.payload
-  })}, { tickers: [] }
+  })}, null
 )

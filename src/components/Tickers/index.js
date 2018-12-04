@@ -1,14 +1,15 @@
-import React, { Component, Fragment } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
 // import { List } from 'react-virtualized'
-import { loadTickers } from '../../actions'
+import { fetchTickersAction } from '../../actions'
 
-class Tickers extends Component {
+class Tickers extends PureComponent {
   componentDidMount () {
-    this.props.loadTickers()
+    this.props.fetchTickers()
   }
 
   render () {
+    const { tickers } = this.props
     return (
       <Fragment>
         Tickers
@@ -19,5 +20,5 @@ class Tickers extends Component {
 
 export default connect(
   ({ tickers }) => ({ tickers }),
-  (dispatch) => ({ loadTickers: () => dispatch(loadTickers()) })
+  (dispatch) => ({ fetchTickers: () => dispatch(fetchTickersAction()) })
 )(Tickers)

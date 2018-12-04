@@ -1,4 +1,7 @@
 import { createAction } from 'redux-actions'
 
-export const loadTickers = createAction('LOAD_TICKERS')
-export const tickersLoaded = createAction('TICKERS_LOADED')
+export const FETCH_TICKERS = 'FETCH_TICKERS'
+export const TICKERS_FETCHED_OK = 'TICKERS_FETCHED_OK'
+
+export const fetchTickersAction = createAction(FETCH_TICKERS)
+export const tickersFetchedOkAction = createAction(TICKERS_FETCHED_OK)
