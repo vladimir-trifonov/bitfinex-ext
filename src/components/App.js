@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import './App.css'
 
-import { getStore } from '../getStore'
+import configureStore from '../configureStore'
 import { Provider } from 'react-redux'
 
-const store = getStore()
+const store = configureStore()
 
 class App extends Component {
   render() {

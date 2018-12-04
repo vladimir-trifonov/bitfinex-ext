@@ -5,12 +5,14 @@ import { initSagas } from './initSagas'
 import { reducer } from './combineReducers'
 import { defaultState } from './defaultState'
 
-export const getStore = () => {
+const __DEV__ = process.env.NODE_ENV === 'development'
+
+export default () => {
   const sagaMiddleware = createSagaMiddleware()
   const middleWares = [sagaMiddleware]
-
-  const composeEnhancers = process.env.NODE_ENV === 'development' 
-    && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ 
+  
+  const composeEnhancers = (__DEV__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
       ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) 
       : compose
   const enhancer = composeEnhancers(applyMiddleware(...middleWares))
