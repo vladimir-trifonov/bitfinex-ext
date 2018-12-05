@@ -1,1 +1,2 @@
-export { fetchTickersSaga } from './tickersSaga'
+export { fetchTickersSaga, navigateToTickerViewSaga } from './tickersSaga'
+export { fetchTradesSaga } from './tradesSaga'

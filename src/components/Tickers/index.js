@@ -1,12 +1,22 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { fetchTickersAction } from '../../actions'
+import { fetchTickersAction, setCurrentSymbolAction } from '../../actions'
 import { Table } from '../Table'
-import { getTickersSelector } from '../../selectors';
 
 class Tickers extends PureComponent {
+  constructor () {
+    super()
+
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   componentDidMount () {
     this.props.fetchTickers()
+  }
+
+  handleClick (i) {
+    const { tickers } = this.props
+    this.props.setCurrentSymbol(tickers.get(i)[0])
   }
 
   render () {
@@ -16,13 +26,17 @@ class Tickers extends PureComponent {
 
     return (
       <Table
-        items={tickers}
+        items={tickers.toJS()}
+        onClick={this.handleClick}
       />
     )
   }
 }
 
 export default connect(
-  (state) => ({ tickers: getTickersSelector(state) }),
-  (dispatch) => ({ fetchTickers: () => dispatch(fetchTickersAction()) })
+  ({ tickers }) => ({ tickers }),
+  (dispatch) => ({ 
+    fetchTickers: () => dispatch(fetchTickersAction()),
+    setCurrentSymbol: (symbol) => dispatch(setCurrentSymbolAction(symbol)) 
+  })
 )(Tickers)

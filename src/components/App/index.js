@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import configureStore from '../../configureStore'
+import { Route } from 'react-router-dom'
+import { ConnectedRouter } from 'connected-react-router'
+import { history, configureStore } from '../../configureStore'
 import Dashboard from '../Dashboard'
 
 const store = configureStore()
@@ -10,12 +11,12 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
+        <ConnectedRouter history={history}>
           <Fragment>
             <Route exact path="/" component={Dashboard} />
-            <Route path="/tickers" component={Dashboard} />
+            <Route path="/tickers/:symbol" component={Dashboard} />
           </Fragment>
-        </Router>
+        </ConnectedRouter>
       </Provider>
     )
   }

@@ -4,3 +4,8 @@ export {
   fetchTickersAction, 
   tickersFetchedOkAction
 } from './tickers'
+
+export {
+  SET_CURRENT_SYMBOL,
+  setCurrentSymbolAction
+} from './symbols'
