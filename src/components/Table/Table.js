@@ -1,8 +1,15 @@
 import React, { PureComponent } from 'react'
 import styles from './Table.module.css'
-import { Row } from './Row'
+import Row from './Row'
+import Header from './Header'
 
 export class Table extends PureComponent {
+  static defaultProps = {
+    useDataAsKey: false,
+    keyDataIndex: 0,
+    columns: null
+  }
+
   constructor () {
     super()
 
@@ -10,19 +17,33 @@ export class Table extends PureComponent {
   }
 
   handleClick (e) {
-    const { onClick } = this.props
-    onClick && onClick(e.target.parentElement.rowIndex)
+    const { onClick, columns } = this.props
+    const rowIndex = e.target.parentElement.rowIndex
+    onClick && onClick(columns ? rowIndex - 1 : rowIndex)
   }
 
   render () {
-    const { items } = this.props
+    const { items, columns, title, useDataAsKey, keyDataIndex, count } = this.props
+
+    if (!items || !count) return null
+
     return (
       <div className={styles.tableWrapper}>
         <div className={styles.table}>
+          {title &&
+            <div className={styles.title}>
+              {title}
+            </div>
+          }
           <table>
+            {columns &&
+              <thead>
+                <Header columns={columns} />
+              </thead>
+            }
             <tbody onClick={this.handleClick}>
-              {items.map((item) => (
-                <Row key={item[0]} item={item} />
+              {items.map((item, i) => (
+                <Row key={useDataAsKey ? item[keyDataIndex] : i} item={item} />
               ))}
             </tbody>
           </table>

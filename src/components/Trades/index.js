@@ -19,13 +19,15 @@ class Trades extends PureComponent {
   }
 
   render () {
-    const { trades } = this.props
+    const { trades, ticker } = this.props
 
     if (!trades) return null
 
     return (
       <Table
         items={trades}
+        title={`Trades - ${ticker}`}
+        count={trades.size}
       />
     )
   }

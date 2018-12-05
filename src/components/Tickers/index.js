@@ -36,6 +36,11 @@ class Tickers extends PureComponent {
       <Table
         items={tickers}
         onClick={this.handleClick}
+        title = 'Tickers'
+        columns={['Label1', 'Label2', 'Label3', 'Label4', 'Label5']}
+        useDataAsKey={true}
+        keyDataIndex={0}
+        count={tickers.size}
       />
     )
   }
