@@ -1,4 +1,5 @@
 import { take, put, spawn } from 'redux-saga/effects'
+import { List } from 'immutable'
 
 import {
     FETCH_TICKERS,
@@ -13,7 +14,7 @@ function* fetchTickers() {
       }
     })
     const data = yield response.json()
-    yield put(tickersFetchedOkAction(data))
+    yield put(tickersFetchedOkAction(List(data)))
   } catch(e) {
     console.error(e)
   }

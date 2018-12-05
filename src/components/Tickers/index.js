@@ -1,7 +1,8 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-// import { List } from 'react-virtualized'
 import { fetchTickersAction } from '../../actions'
+import { Table } from '../Table'
+import { getTickersSelector } from '../../selectors';
 
 class Tickers extends PureComponent {
   componentDidMount () {
@@ -10,15 +11,18 @@ class Tickers extends PureComponent {
 
   render () {
     const { tickers } = this.props
+
+    if (!tickers) return null
+
     return (
-      <Fragment>
-        Tickers
-      </Fragment>
+      <Table
+        items={tickers}
+      />
     )
   }
 }
 
 export default connect(
-  ({ tickers }) => ({ tickers }),
+  (state) => ({ tickers: getTickersSelector(state) }),
   (dispatch) => ({ fetchTickers: () => dispatch(fetchTickersAction()) })
 )(Tickers)

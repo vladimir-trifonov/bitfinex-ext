@@ -1,0 +1,1 @@
+export { getTickersSelector } from './getTickersSelector'

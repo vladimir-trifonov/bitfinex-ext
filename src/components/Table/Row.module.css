@@ -1,0 +1,9 @@
+.col {
+  padding: 5px 10px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #808080;
+  line-height: 1.2;
+  background-color: #222222;
+}
