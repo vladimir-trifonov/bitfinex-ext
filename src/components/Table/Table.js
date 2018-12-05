@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import styles from './Table.module.css'
-import Row from './Row'
+import { Row } from './Row'
 
 export class Table extends PureComponent {
   constructor () {

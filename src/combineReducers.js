@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
 import {
-  tickers
+  tickers,
+  trades
 } from './reducers'
 
 export default (history) => combineReducers({
   router: connectRouter(history),
-  tickers
+  tickers,
+  trades
 })

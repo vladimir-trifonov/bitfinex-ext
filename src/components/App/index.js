@@ -14,7 +14,7 @@ class App extends Component {
         <ConnectedRouter history={history}>
           <Fragment>
             <Route exact path="/" component={Dashboard} />
-            <Route path="/tickers/:symbol" component={Dashboard} />
+            <Route path="/tickers/:ticker" component={Dashboard} />
           </Fragment>
         </ConnectedRouter>
       </Provider>

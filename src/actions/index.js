@@ -6,3 +6,10 @@ export {
   tickersFetchedOkAction,
   currentTickerChangedAction
 } from './tickers'
+
+export {
+  FETCH_TRADES,
+  TRADES_FETCHED_OK,
+  fetchTradesAction, 
+  tradesFetchedOkAction
+} from './trades'

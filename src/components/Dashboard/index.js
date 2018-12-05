@@ -1,10 +1,13 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import styles from './Dashboard.module.css'
 import Tickers from '../Tickers'
+import Trades from '../Trades'
 
-export default function () {
+export default ({ match: { params: { ticker = null }}}) => {
   return (
-    <Fragment>
+    <main className={styles.dashboard}>
       <Tickers />
-    </Fragment>
+      <Trades ticker={ticker} />
+    </main>
   )
 }
