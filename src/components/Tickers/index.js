@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { fetchTickersAction, setCurrentSymbolAction } from '../../actions'
+import { fetchTickersAction, currentTickerChangedAction } from '../../actions'
 import { Table } from '../Table'
 
 class Tickers extends PureComponent {
@@ -15,8 +15,8 @@ class Tickers extends PureComponent {
   }
 
   handleClick (i) {
-    const { tickers } = this.props
-    this.props.setCurrentSymbol(tickers.get(i)[0])
+    const ticker = this.props.tickers.get(i)
+    ticker && this.props.currentTickerChanged(ticker[0])
   }
 
   render () {
@@ -37,6 +37,6 @@ export default connect(
   ({ tickers }) => ({ tickers }),
   (dispatch) => ({ 
     fetchTickers: () => dispatch(fetchTickersAction()),
-    setCurrentSymbol: (symbol) => dispatch(setCurrentSymbolAction(symbol)) 
+    currentTickerChanged: (symbol) => dispatch(currentTickerChangedAction(symbol)) 
   })
 )(Tickers)

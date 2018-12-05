@@ -1,11 +1,8 @@
 export {
   FETCH_TICKERS,
   TICKERS_FETCHED_OK,
+  CURRENT_TICKER_CHANGED,
   fetchTickersAction, 
-  tickersFetchedOkAction
+  tickersFetchedOkAction,
+  currentTickerChangedAction
 } from './tickers'
-
-export {
-  SET_CURRENT_SYMBOL,
-  setCurrentSymbolAction
-} from './symbols'
