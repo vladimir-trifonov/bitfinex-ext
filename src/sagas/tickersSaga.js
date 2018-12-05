@@ -1,11 +1,11 @@
 import { delay } from 'redux-saga'
-import { take, takeLatest, put, spawn } from 'redux-saga/effects'
+import { take, takeLatest, put, fork, cancel } from 'redux-saga/effects'
 import { List } from 'immutable'
 import { push } from 'connected-react-router'
-
 import {
   CURRENT_TICKER_CHANGED,
   FETCH_TICKERS,
+  STOP_TICKERS_SYNC,
   tickersFetchedOkAction
 } from './../actions'
 
@@ -19,8 +19,12 @@ function* fetchTickers () {
 }
 
 export function* fetchTickersSaga () {
-  yield take(FETCH_TICKERS)
-  yield spawn(fetchTickers)
+  while (true) {
+    yield take(FETCH_TICKERS)
+    const syncTask = yield fork(fetchTickers)
+    yield take(STOP_TICKERS_SYNC)
+    yield cancel(syncTask)
+  }
 }
 
 function* navigateToTickerView ({ payload }) {

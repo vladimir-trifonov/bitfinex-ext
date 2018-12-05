@@ -15,10 +15,10 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0,173,95,0.8); 
+  background: rgba(25, 125, 81, 0.8); 
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 
 ::-webkit-scrollbar-thumb:window-inactive {
-  background: rgba(0,173,95,0.4); 
+  background: rgba(25, 125, 81, 0.4); 
 }

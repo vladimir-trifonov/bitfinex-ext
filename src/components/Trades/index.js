@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { fetchTradesAction } from '../../actions'
+import { fetchTradesAction, stopTradesSyncAction } from '../../actions'
 import { Table } from '../Table'
 
 class Trades extends PureComponent {
@@ -12,6 +12,10 @@ class Trades extends PureComponent {
   componentDidUpdate ({ ticker: prevTicker }) {
     const { ticker, fetchTrades } = this.props
     ticker !== prevTicker && fetchTrades()
+  }
+
+  componentWillUnmount () {
+    this.props.stopTradesSync()
   }
 
   render () {
@@ -30,6 +34,7 @@ class Trades extends PureComponent {
 export default connect(
   ({ trades }) => ({ trades }),
   (dispatch, { ticker }) => ({ 
-    fetchTrades: () => ticker && dispatch(fetchTradesAction(ticker))
+    fetchTrades: () => ticker && dispatch(fetchTradesAction(ticker)),
+    stopTradesSync: () => dispatch(stopTradesSyncAction())
   })
 )(Trades)

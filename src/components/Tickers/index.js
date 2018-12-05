@@ -1,6 +1,10 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { fetchTickersAction, currentTickerChangedAction } from '../../actions'
+import { 
+  fetchTickersAction, 
+  currentTickerChangedAction, 
+  stopTyckersSyncAction 
+} from '../../actions'
 import { Table } from '../Table'
 
 class Tickers extends PureComponent {
@@ -12,6 +16,10 @@ class Tickers extends PureComponent {
 
   componentDidMount () {
     this.props.fetchTickers()
+  }
+
+  componentWillUnmount () {
+    this.props.stopTyckersSync()
   }
 
   handleClick (i) {
@@ -37,6 +45,7 @@ export default connect(
   ({ tickers }) => ({ tickers }),
   (dispatch) => ({ 
     fetchTickers: () => dispatch(fetchTickersAction()),
-    currentTickerChanged: (symbol) => dispatch(currentTickerChangedAction(symbol)) 
+    currentTickerChanged: (symbol) => dispatch(currentTickerChangedAction(symbol)), 
+    stopTyckersSync: () => dispatch(stopTyckersSyncAction()) 
   })
 )(Tickers)
