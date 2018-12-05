@@ -15,7 +15,7 @@ export class Table extends PureComponent {
   }
 
   render () {
-    const { items = [] } = this.props
+    const { items } = this.props
     return (
       <div className={styles.tableWrapper}>
         <div className={styles.table}>

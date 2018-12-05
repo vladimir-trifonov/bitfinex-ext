@@ -26,7 +26,7 @@ class Tickers extends PureComponent {
 
     return (
       <Table
-        items={tickers.toJS()}
+        items={tickers}
         onClick={this.handleClick}
       />
     )
