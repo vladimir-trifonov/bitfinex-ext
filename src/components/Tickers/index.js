@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { 
-  fetchTickersAction, 
+  fetchResourceAction, 
   currentSymbolChangedAction, 
-  stopTickersSyncAction 
+  stopResourceSyncAction 
 } from '../../actions'
 import { getTickersSelector } from '../../selectors'
 import { Table } from '../Table'
@@ -49,8 +49,8 @@ class Tickers extends PureComponent {
 export default connect(
   (state) => ({ tickers: getTickersSelector(state) }),
   (dispatch) => ({ 
-    fetchTickers: () => dispatch(fetchTickersAction()),
+    fetchTickers: () => dispatch(fetchResourceAction('tickers')),
     currentSymbolChanged: (symbol) => dispatch(currentSymbolChangedAction(symbol)), 
-    stopTickersSync: () => dispatch(stopTickersSyncAction()) 
+    stopTickersSync: () => dispatch(stopResourceSyncAction()) 
   })
 )(Tickers)

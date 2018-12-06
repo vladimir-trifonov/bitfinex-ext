@@ -1,3 +1,3 @@
-export { fetchTickersSaga } from './tickersSaga'
-export { wsSubscribeSaga, wsUnsubscribeSaga } from './wsSaga'
+export { fetchResourceSaga } from './resourceSaga'
+export { socketSubscribeSaga, socketUnsubscribeSaga } from './socketSaga'
 export { fetchSymbolsSaga, navigateToTradingPageSaga } from './symbolsSaga'

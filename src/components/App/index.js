@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { Provider } from 'react-redux'
 import { Route } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
@@ -8,7 +8,7 @@ import TradingPage from '../../pages/TradingPage'
 
 const store = configureStore()
 
-class App extends Component {
+class App extends PureComponent {
   render() {
     return (
       <Provider store={store}>

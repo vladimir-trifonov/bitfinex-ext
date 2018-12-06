@@ -1,7 +1,7 @@
 .homePage {
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  padding: 1em;
 }

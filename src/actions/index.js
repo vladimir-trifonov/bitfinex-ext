@@ -1,17 +1,9 @@
-export {
-  FETCH_TICKERS,
-  TICKERS_FETCHED_OK,
-  STOP_TICKERS_SYNC,
-  fetchTickersAction, 
-  tickersFetchedOkAction,
-  stopTickersSyncAction
-} from './tickers'
+import { tickersFetchedOkAction } from './tickers'
+import { tradesFetchedOkAction } from './trades'
+import { symbolsFetchedOkAction } from './symbols'
 
-export {
-  TRADES_FETCHED_OK,
-  tradesFetchedOkAction
-} from './trades'
-
+export { tickersFetchedOkAction, TICKERS_FETCHED_OK } from './tickers'
+export { tradesFetchedOkAction, TRADES_FETCHED_OK } from './trades'
 export {
   FETCH_SYMBOLS,
   SYMBOLS_FETCHED_OK,
@@ -20,10 +12,21 @@ export {
   symbolsFetchedOkAction,
   currentSymbolChangedAction
 } from './symbols'
-
 export {
-  WS_SUBSCRIBE,
-  WS_UNSUBSCRIBE,
-  wsSubscribeAction,
-  wsUnsubscribeAction
-} from './ws'
+  SOCKET_SUBSCRIBE,
+  SOCKET_UNSUBSCRIBE,
+  socketSubscribeAction,
+  socketUnsubscribeAction
+} from './socket'
+export {
+  FETCH_RESOURCE,
+  STOP_RESOURCE_SYNC,
+  fetchResourceAction, 
+  stopResourceSyncAction
+} from './resource'
+export default {
+  tickersFetchedOkAction,
+  tradesFetchedOkAction,
+  symbolsFetchedOkAction
+}
+

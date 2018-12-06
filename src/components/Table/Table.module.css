@@ -3,6 +3,8 @@
   background-color: #393939;
   max-height: 600px;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: row;
 }
 
 .table thead tr th {

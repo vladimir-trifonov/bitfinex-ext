@@ -1,8 +1,7 @@
 .tradingPage {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 1em;
 }

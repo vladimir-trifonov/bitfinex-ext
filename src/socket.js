@@ -2,7 +2,7 @@ const ws = WebSocket
 
 export default (() => {
   let subscriptions = {}
-  const w = new ws(process.env.REACT_APP_BITFINEX_WS_URL)
+  const w = new ws(process.env.REACT_APP_BITFINEX_SOCKET_URL)
 
   const sendMessage = (msg) => w.send(JSON.stringify(msg))
 
@@ -32,13 +32,13 @@ export default (() => {
     }
   }
 
-  const subscribe = (channel, symbol, overwrite, repeat = 3) => {
+  const subscribe = (channel, symbol, overwrite, retry = 3) => {
     if (w.readyState === w.OPEN) {
       if (overwrite) unsubscribeFromChannel(null, channel)
       subscribeToChannel(channel, symbol)
     } else {
-      repeat && setTimeout(() => 
-        (subscribe(channel, symbol, overwrite, repeat - 1))
+      retry && setTimeout(() => 
+        (subscribe(channel, symbol, overwrite, retry - 1))
       , 5000)
     }
   }

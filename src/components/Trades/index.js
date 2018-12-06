@@ -1,22 +1,22 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { wsSubscribeAction, wsUnsubscribeAction } from '../../actions'
+import { socketSubscribeAction, socketUnsubscribeAction } from '../../actions'
 import { getTradesSelector } from '../../selectors'
 import { Table } from '../Table'
 import { parseSymbol } from '../../utils'
 
 class Trades extends PureComponent {
   componentDidMount () {
-    this.props.wsSubscribe()
+    this.props.socketSubscribe()
   }
 
   componentDidUpdate ({ symbol: prevTicker }) {
-    const { symbol, wsSubscribe } = this.props
-    symbol !== prevTicker && wsSubscribe()
+    const { symbol, socketSubscribe } = this.props
+    symbol !== prevTicker && socketSubscribe()
   }
 
   componentWillUnmount () {
-    this.props.wsUnsubscribe()
+    this.props.socketUnsubscribe()
   }
 
   render () {
@@ -38,7 +38,7 @@ class Trades extends PureComponent {
 export default connect(
   (state) => ({ trades: getTradesSelector(state) }),
   (dispatch, { symbol }) => ({ 
-    wsSubscribe: () => symbol && dispatch(wsSubscribeAction({ symbol, channel: 'trades' })),
-    wsUnsubscribe: () => dispatch(wsUnsubscribeAction({ channel: 'trades' }))
+    socketSubscribe: () => symbol && dispatch(socketSubscribeAction({ symbol, channel: 'trades' })),
+    socketUnsubscribe: () => dispatch(socketUnsubscribeAction({ channel: 'trades' }))
   })
 )(Trades)
