@@ -2,18 +2,9 @@ const ws = WebSocket
 
 export default (() => {
   let subscriptions = {}
-  let chanIds = []
   const w = new ws(process.env.REACT_APP_BITFINEX_WS_URL)
 
-  const isOpen = () => w.readyState === w.OPEN
-
-  const sendMessage = (msg) => {
-    w.send(JSON.stringify(msg))
-  }
-
-  const isSubscriptionValid = (chanId) => {
-    return chanIds.indexOf(chanId) !== -1
-  }
+  const sendMessage = (msg) => w.send(JSON.stringify(msg))
 
   const subscribeToChannel = (channel, symbol) => {
     sendMessage({
@@ -23,29 +14,15 @@ export default (() => {
     })
   }
 
-  const getChanIdFromSubscriptions = (channel) => {
-    let chanId = null
-    Object.keys(subscriptions).some((id) => {
-      const subscription = subscriptions[id]
-      if (subscription.channel === channel) {
-        chanId = id
-        return true
-      }
-      return false
-    })
-
-    return chanId
+  const getChanIdByChannel = (channel) => {
+    return Object.keys(subscriptions).find((id) => subscriptions[id] === channel)
   }
 
   const unsubscribeFromChannel = (chanId, channel) => {
     if (!Object.keys(subscriptions).length) return
-    if (!chanId) {
-      chanId = getChanIdFromSubscriptions(channel)
-    }
+    if (!chanId) chanId = getChanIdByChannel(channel)
 
     if (chanId) {
-      const index = chanIds.indexOf(chanId)
-      if (index !== -1) chanIds.splice(index, 1)
       delete subscriptions[chanId]
 
       sendMessage({
@@ -55,19 +32,14 @@ export default (() => {
     }
   }
 
-  const msgSubscriptionOk = ({ channel, symbol, chanId }) => {
-    chanIds.push(chanId)
-    subscriptions[chanId] = {
-      channel, symbol
-    }
-  }
-
-  const subscribe = (channel, symbol, overwrite) => {
-    if (isOpen()) {
+  const subscribe = (channel, symbol, overwrite, repeat = 3) => {
+    if (w.readyState === w.OPEN) {
       if (overwrite) unsubscribeFromChannel(null, channel)
       subscribeToChannel(channel, symbol)
     } else {
-      setTimeout(() => (subscribe(channel, symbol, overwrite)), 5000)
+      repeat && setTimeout(() => 
+        (subscribe(channel, symbol, overwrite, repeat - 1))
+      , 5000)
     }
   }
 
@@ -76,17 +48,13 @@ export default (() => {
   w.onmessage = (msg) => {
     const data = JSON.parse(msg.data)
     if (Array.isArray(data)) {
-      const [ chanId, updates ] = data
-      if (!isSubscriptionValid(chanId)) {
-        unsubscribeFromChannel(chanId)
-      } else {
-        if (Array.isArray(updates)) {
-          // TODO
-        }
-      }
+      // const [ chanId, ...payload ] = data
+
+      // TODO: emit
     } else {
       if (data.event === 'subscribed') {
-        msgSubscriptionOk(data)
+        const { channel, chanId } = data
+        subscriptions[chanId] = channel
       }
     }
 

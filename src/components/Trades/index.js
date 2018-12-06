@@ -1,32 +1,34 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { fetchTradesAction, stopTradesSyncAction } from '../../actions'
+import { wsSubscribeAction, wsUnsubscribeAction } from '../../actions'
+import { getTradesSelector } from '../../selectors'
 import { Table } from '../Table'
+import { parseSymbol } from '../../utils'
 
 class Trades extends PureComponent {
   componentDidMount () {
-    const { fetchTrades } = this.props
-    fetchTrades()
+    this.props.wsSubscribe()
   }
 
-  componentDidUpdate ({ ticker: prevTicker }) {
-    const { ticker, fetchTrades } = this.props
-    ticker !== prevTicker && fetchTrades()
+  componentDidUpdate ({ symbol: prevTicker }) {
+    const { symbol, wsSubscribe } = this.props
+    symbol !== prevTicker && wsSubscribe()
   }
 
   componentWillUnmount () {
-    this.props.stopTradesSync()
+    this.props.wsUnsubscribe()
   }
 
   render () {
-    const { trades, ticker } = this.props
+    const { trades, symbol } = this.props
 
     if (!trades) return null
 
     return (
       <Table
         items={trades}
-        title={`Trades - ${ticker}`}
+        title={`Trades - ${parseSymbol(symbol, true)}`}
+        columns={['Time', 'Amount', 'Price']}
         count={trades.size}
       />
     )
@@ -34,9 +36,9 @@ class Trades extends PureComponent {
 }
 
 export default connect(
-  ({ trades }) => ({ trades }),
-  (dispatch, { ticker }) => ({ 
-    fetchTrades: () => ticker && dispatch(fetchTradesAction(ticker)),
-    stopTradesSync: () => dispatch(stopTradesSyncAction())
+  (state) => ({ trades: getTradesSelector(state) }),
+  (dispatch, { symbol }) => ({ 
+    wsSubscribe: () => symbol && dispatch(wsSubscribeAction({ symbol, channel: 'trades' })),
+    wsUnsubscribe: () => dispatch(wsUnsubscribeAction({ channel: 'trades' }))
   })
 )(Trades)

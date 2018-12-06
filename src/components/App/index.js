@@ -3,7 +3,8 @@ import { Provider } from 'react-redux'
 import { Route } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
 import { history, configureStore } from '../../configureStore'
-import Dashboard from '../Dashboard'
+import HomePage from '../../pages/HomePage'
+import TradingPage from '../../pages/TradingPage'
 
 const store = configureStore()
 
@@ -13,8 +14,8 @@ class App extends Component {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Fragment>
-            <Route exact path="/" component={Dashboard} />
-            <Route path="/tickers/:ticker" component={Dashboard} />
+            <Route exact path="/" component={HomePage} />
+            <Route path="/trading/:symbol" component={TradingPage} />
           </Fragment>
         </ConnectedRouter>
       </Provider>

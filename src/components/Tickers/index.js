@@ -2,9 +2,10 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { 
   fetchTickersAction, 
-  currentTickerChangedAction, 
-  stopTyckersSyncAction 
+  currentSymbolChangedAction, 
+  stopTickersSyncAction 
 } from '../../actions'
+import { getTickersSelector } from '../../selectors'
 import { Table } from '../Table'
 
 class Tickers extends PureComponent {
@@ -19,12 +20,13 @@ class Tickers extends PureComponent {
   }
 
   componentWillUnmount () {
-    this.props.stopTyckersSync()
+    this.props.stopTickersSync()
   }
 
-  handleClick (i) {
-    const ticker = this.props.tickers.get(i)
-    ticker && this.props.currentTickerChanged(ticker[0])
+  handleClick (index) {
+    const ticker = this.props.tickers.get(index)
+    const [symbol] = ticker
+    this.props.currentSymbolChanged(symbol)
   }
 
   render () {
@@ -37,9 +39,7 @@ class Tickers extends PureComponent {
         items={tickers}
         onClick={this.handleClick}
         title = 'Tickers'
-        columns={['Label1', 'Label2', 'Label3', 'Label4', 'Label5']}
-        useDataAsKey={true}
-        keyDataIndex={0}
+        columns={['Name', 'Last', '24H', 'VOL BTC']}
         count={tickers.size}
       />
     )
@@ -47,10 +47,10 @@ class Tickers extends PureComponent {
 }
 
 export default connect(
-  ({ tickers }) => ({ tickers }),
+  (state) => ({ tickers: getTickersSelector(state) }),
   (dispatch) => ({ 
     fetchTickers: () => dispatch(fetchTickersAction()),
-    currentTickerChanged: (symbol) => dispatch(currentTickerChangedAction(symbol)), 
-    stopTyckersSync: () => dispatch(stopTyckersSyncAction()) 
+    currentSymbolChanged: (symbol) => dispatch(currentSymbolChangedAction(symbol)), 
+    stopTickersSync: () => dispatch(stopTickersSyncAction()) 
   })
 )(Tickers)
