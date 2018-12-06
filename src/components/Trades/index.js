@@ -10,9 +10,9 @@ class Trades extends PureComponent {
     this.props.socketSubscribe()
   }
 
-  componentDidUpdate ({ symbol: prevTicker }) {
+  componentDidUpdate ({ symbol: prevSymbol }) {
     const { symbol, socketSubscribe } = this.props
-    symbol !== prevTicker && socketSubscribe()
+    symbol !== prevSymbol && socketSubscribe()
   }
 
   componentWillUnmount () {

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { 
-  fetchSymbolsAction, 
+  fetchResourceAction, 
   currentSymbolChangedAction
 } from '../../actions'
 import { getSymbolsSelector } from '../../selectors'
@@ -43,7 +43,7 @@ class Symbols extends PureComponent {
 export default connect(
   (state) => ({ symbols: getSymbolsSelector(state) }),
   (dispatch) => ({ 
-    fetchSymbols: () => dispatch(fetchSymbolsAction()),
+    fetchSymbols: () => dispatch(fetchResourceAction('symbols')),
     currentSymbolChanged: (symbol) => dispatch(currentSymbolChangedAction(symbol)),
   })
 )(Symbols)
