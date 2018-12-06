@@ -13,7 +13,7 @@ export default class Row extends PureComponent {
     const { item } = this.props
     return (
       <tr>
-        {typeof item === 'string' 
+        {typeof item === 'string' || typeof item === 'number'
           ? Row.renderCell(item, 0)
           : item.map(Row.renderCell)
         }

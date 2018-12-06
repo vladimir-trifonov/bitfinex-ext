@@ -1,13 +1,14 @@
-export default ((ws) => {
+export default (emitter) => {
   const subscriptions = {}
   let queue = []
-  const w = new ws(process.env.REACT_APP_BITFINEX_SOCKET_URL)
+  let emit = null
+  const w = new WebSocket(process.env.REACT_APP_BITFINEX_SOCKET_URL)
 
   const sendMessage = (msg) => w.send(JSON.stringify(msg))
   const getChanIdByChannel = (channel) => Object.keys(subscriptions)
     .find((id) => subscriptions[id] === channel)
   const removeFromQueue = (channel) => {
-    queue = queue.filter(({channel : ch}) => channel === ch)
+    queue = queue.filter(({channel : ch}) => channel !== ch)
   }
   const subscribeToChannel = ({channel, symbol, overwrite}) => {
     if (overwrite) unsubscribeFromChannel(channel)
@@ -37,18 +38,20 @@ export default ((ws) => {
       : queue.push({ channel, symbol, overwrite })
   }
   const onSubscribed = ({ channel, chanId }) => subscriptions[chanId] = channel
-  const onMessage = (data) => {}
+  const close = () => w.close()
+  const setEmitter = (emitter) => emit = emitter
+  const ready = (emitter) => !!emit
 
   w.onopen = () => {
     while(queue.length) subscribeToChannel(queue.shift())
   }
   w.onmessage = (msg) => {
     const data = JSON.parse(msg.data)
-    // TODO: remove console.log
-    console.log(data)
     if (Array.isArray(data)) {
-      const [ , ...payload ] = data
-      onMessage(payload)
+      const [ chanId ] = data
+      const channel = subscriptions[chanId]
+      if (!channel) return
+      emit && emit([channel, data])
     } else {
       data.event === 'subscribed'&& onSubscribed(data)
     }
@@ -56,6 +59,9 @@ export default ((ws) => {
 
   return { 
     subscribe,
-    unsubscribe: unsubscribeFromChannel
+    unsubscribe: unsubscribeFromChannel,
+    setEmitter,
+    close,
+    ready
   }
-})(WebSocket)
+}

@@ -4,7 +4,7 @@
   max-height: 600px;
   overflow-y: scroll;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .table thead tr th {

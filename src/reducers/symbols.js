@@ -3,5 +3,5 @@ import { symbolsFetchedOkAction } from '../actions'
 import { List } from 'immutable'
 
 export const symbols = handleActions({
-  [symbolsFetchedOkAction]: (state, action) => List(action.payload)
+  [symbolsFetchedOkAction]: (symbols, { payload }) => List(payload)
 }, List([]))

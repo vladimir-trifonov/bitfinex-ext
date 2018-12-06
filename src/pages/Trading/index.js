@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import styles from './Trading.module.css'
-import { Tickers, Trades } from '../../components'
+import { Tickers, Book, Trades } from '../../components'
 
 export class Trading extends PureComponent {
   render() {
@@ -8,6 +8,7 @@ export class Trading extends PureComponent {
     return (
       <main className={styles.trading}>
         <Tickers />
+        <Book symbol={symbol} />
         <Trades symbol={symbol} />
       </main>
     )

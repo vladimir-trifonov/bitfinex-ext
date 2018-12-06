@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { 
-  fetchResourceAndSyncAction, 
+  fetchTickersAndSyncAction, 
   currentSymbolChangedAction, 
-  stopResourceSyncAction 
+  stopTickersSyncAction,
+  emptyTickersAction
 } from '../../actions'
 import { getTickersSelector } from '../../selectors'
 import Table from '../Table'
@@ -20,7 +21,9 @@ class Tickers extends PureComponent {
   }
 
   componentWillUnmount () {
-    this.props.stopTickersSync()
+    const { stopTickersSync, emptyTickers } = this.props
+    stopTickersSync()
+    emptyTickers()
   }
 
   handleClick (index) {
@@ -49,8 +52,9 @@ class Tickers extends PureComponent {
 export default connect(
   (state) => ({ tickers: getTickersSelector(state) }),
   (dispatch) => ({ 
-    fetchTickers: () => dispatch(fetchResourceAndSyncAction('tickers')),
+    fetchTickers: () => dispatch(fetchTickersAndSyncAction('tickers')),
     currentSymbolChanged: (symbol) => dispatch(currentSymbolChangedAction(symbol)), 
-    stopTickersSync: () => dispatch(stopResourceSyncAction()) 
+    stopTickersSync: () => dispatch(stopTickersSyncAction()),
+    emptyTickers: () => dispatch(emptyTickersAction()) 
   })
 )(Tickers)
