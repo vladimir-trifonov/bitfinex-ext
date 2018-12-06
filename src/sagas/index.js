@@ -1,3 +1,3 @@
-export * from './resourceSaga'
-export * from './socketSaga'
-export * from './symbolsSaga'
+export * from './resource'
+export * from './socket'
+export * from './symbols'

@@ -46,7 +46,7 @@ export default (() => {
   }
   w.onmessage = (msg) => {
     const data = JSON.parse(msg.data)
-
+    // TODO: remove console.log
     console.log(data)
     if (Array.isArray(data)) {
       const [ , ...payload ] = data

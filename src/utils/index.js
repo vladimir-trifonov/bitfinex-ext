@@ -1,2 +1,2 @@
-export * from './arrayUtils'
-export * from './symbolUtils'
+export * from './array'
+export * from './symbol'
