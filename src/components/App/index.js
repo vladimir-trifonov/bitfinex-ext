@@ -3,8 +3,7 @@ import { Provider } from 'react-redux'
 import { Route } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
 import { history, configureStore } from '../../configureStore'
-import Home from '../../pages/Home'
-import Trading from '../../pages/Trading'
+import { Home, Trading } from '../../pages'
 
 const store = configureStore()
 

@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
 import styles from './Trading.module.css'
-import Tickers from '../../components/Tickers'
-import Trades from '../../components/Trades'
+import { Tickers, Trades } from '../../components'
 
-export default class extends PureComponent {
+export class Trading extends PureComponent {
   render() {
     const { match: { params: { symbol = null }}} = this.props
     return (
