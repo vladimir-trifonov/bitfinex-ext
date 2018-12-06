@@ -4,7 +4,7 @@ import Row from './Row'
 import Header from './Header'
 import Title from './Title'
 
-export class Table extends PureComponent {
+export default class extends PureComponent {
   static defaultProps = {
     columns: null
   }

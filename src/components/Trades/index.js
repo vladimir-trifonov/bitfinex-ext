@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { socketSubscribeAction, socketUnsubscribeAction } from '../../actions'
 import { getTradesSelector } from '../../selectors'
-import { Table } from '../Table'
+import Table from '../Table'
 import { parseSymbol } from '../../utils'
 
 class Trades extends PureComponent {

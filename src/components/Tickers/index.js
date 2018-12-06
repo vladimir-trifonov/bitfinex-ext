@@ -6,7 +6,7 @@ import {
   stopResourceSyncAction 
 } from '../../actions'
 import { getTickersSelector } from '../../selectors'
-import { Table } from '../Table'
+import Table from '../Table'
 
 class Tickers extends PureComponent {
   constructor () {
