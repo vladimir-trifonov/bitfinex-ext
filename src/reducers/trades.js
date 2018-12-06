@@ -4,6 +4,4 @@ import { List } from 'immutable'
 
 export const trades = handleActions({
   [tradesFetchedOkAction]: (state, action) => List(action.payload.map(List))
-}, 
-  List([])
-)
+}, List([]))
