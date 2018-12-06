@@ -1,6 +1,4 @@
-const ws = WebSocket
-
-export default (() => {
+export default ((ws) => {
   const subscriptions = {}
   let queue = []
   const w = new ws(process.env.REACT_APP_BITFINEX_SOCKET_URL)
@@ -60,4 +58,4 @@ export default (() => {
     subscribe,
     unsubscribe: unsubscribeFromChannel
   }
-})()
+})(WebSocket)
