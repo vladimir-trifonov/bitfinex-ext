@@ -31,7 +31,7 @@ class Book extends PureComponent {
     return (
       <Table
         items={book}
-        title={`Book - ${parseSymbol(symbol, true)}`}
+        title={`Order Book ${parseSymbol(symbol, true)}`}
         columns={['Time', 'Amount', 'Price']}
         count={book.size}
       />
@@ -42,7 +42,7 @@ class Book extends PureComponent {
 export default connect(
   (state) => ({ book: getBookSelector(state) }),
   (dispatch, { symbol }) => ({ 
-    socketSubscribe: () => symbol && dispatch(socketSubscribeAction({ symbol, channel: 'book' })),
+    socketSubscribe: () => symbol && dispatch(socketSubscribeAction({ symbol, channel: 'book', overwrite: true })),
     socketUnsubscribe: () => dispatch(socketUnsubscribeAction({ channel: 'book' })),
     emptyBook: () => dispatch(emptyBookAction())
   })

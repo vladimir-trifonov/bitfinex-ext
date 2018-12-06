@@ -20,9 +20,9 @@ export function* socketInitSaga () {
   }
 }
 
-function* socketSubscribe ({ payload: { channel, symbol } }) {
+function* socketSubscribe ({ payload: { channel, symbol, overwrite } }) {
   if (!socket.ready) yield fork(socketInitSaga)
-  yield call(socket.subscribe, channel, symbol, true)
+  yield call(socket.subscribe, channel, symbol, overwrite)
 }
 
 export function* socketSubscribeSaga () {

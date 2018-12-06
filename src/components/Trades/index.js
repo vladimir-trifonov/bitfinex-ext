@@ -31,7 +31,7 @@ class Trades extends PureComponent {
     return (
       <Table
         items={trades}
-        title={`Trades - ${parseSymbol(symbol, true)}`}
+        title={`Trades ${parseSymbol(symbol, true)}`}
         columns={['Time', 'Amount', 'Price']}
         count={trades.size}
       />
@@ -42,7 +42,7 @@ class Trades extends PureComponent {
 export default connect(
   (state) => ({ trades: getTradesSelector(state) }),
   (dispatch, { symbol }) => ({ 
-    socketSubscribe: () => symbol && dispatch(socketSubscribeAction({ symbol, channel: 'trades' })),
+    socketSubscribe: () => symbol && dispatch(socketSubscribeAction({ symbol, channel: 'trades', overwrite: true })),
     socketUnsubscribe: () => dispatch(socketUnsubscribeAction({ channel: 'trades' })),
     emptyTrades: () => dispatch(emptyTradesAction())
   })
