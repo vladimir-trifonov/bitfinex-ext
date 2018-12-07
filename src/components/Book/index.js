@@ -11,7 +11,7 @@ class Book extends PureComponent {
     const { book, symbol } = this.props
     
     if (!book) return null
-
+    
     return (
       <Table
         items={book}

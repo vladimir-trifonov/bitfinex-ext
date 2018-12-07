@@ -9,7 +9,7 @@ export class Trading extends PureComponent {
       <main className={styles.trading}>
         <Tickers />
         <Trades symbol={symbol} />
-        {/* <Book symbol={symbol} /> */}
+        <Book symbol={symbol} />
       </main>
     )
   }

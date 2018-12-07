@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+import moment from 'moment'
 
 const getTrades = (state) => state.trades
 
@@ -8,6 +9,8 @@ export const getTradesSelector = createSelector(
     ? trades
     : trades
       .map((trade) => trade
+        // Format the time
+        .set(1, moment(trade.get(1)).format('HH:mm:ss'))
         // Do not display the ID
         .remove(0)
       )

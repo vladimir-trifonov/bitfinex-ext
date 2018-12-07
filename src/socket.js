@@ -79,7 +79,6 @@ export default (emitter) => {
   const onData = (data) => {
     const [ chanId ] = data
     const channel = getChannelByChanId(chanId)
-    console.log(data)
     if (channel) {
       emit && emit([channel, data])
     } else {
