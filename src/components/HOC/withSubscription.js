@@ -35,7 +35,7 @@ export default (WrappedComponent, { channel, prop, onUnsubscribeAction }) => {
       socketSubscribe: () => state[prop] && 
         dispatch(socketSubscribeAction({ [prop]: state[prop], channel, overwrite: true })),
       socketUnsubscribe: () => dispatch(socketUnsubscribeAction({ channel })),
-      onUnsubscribe: () => dispatch(onUnsubscribeAction())
+      onUnsubscribe: () => !!onUnsubscribeAction && dispatch(onUnsubscribeAction())
     })
   )(withSubscription)
 }
