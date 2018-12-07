@@ -2,11 +2,12 @@ import { createSelector } from 'reselect'
 import { parseSymbol } from '../utils'
 import { List } from 'immutable'
 
-const getTickers = (state) => state.tickers
+const getTickers = ({ tickers }) => tickers
+const getFilter = ({ filters: { tickers: tickersFilter } }) => tickersFilter
 
 export const getTickersSelector = createSelector(
-  [ getTickers ], 
-  (tickers) => !tickers 
+  [ getTickers, getFilter ], 
+  (tickers, filter) => !tickers 
     ? tickers
     : tickers
       // Do not displays tickers which start with trading
@@ -28,4 +29,6 @@ export const getTickersSelector = createSelector(
           `${(volInBTC | 0) === 0 ? volInBTC : (volInBTC | 0)} BTC`
         )
       })
+      // Search by table filter
+      .filter((ticker) => !filter || (ticker.get(0)).toLowerCase().includes(filter.toLowerCase()))
 )

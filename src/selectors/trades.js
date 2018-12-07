@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import moment from 'moment'
 
-const getTrades = (state) => state.trades
+const getTrades = ({ trades }) => trades
 
 export const getTradesSelector = createSelector(
   [ getTrades ], 

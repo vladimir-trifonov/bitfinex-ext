@@ -4,7 +4,8 @@ import {
   fetchTickersAndSyncAction, 
   currentSymbolChangedAction, 
   stopTickersSyncAction,
-  emptyTickersAction
+  emptyTickersAction,
+  setFilterAction
 } from '../../actions'
 import { getTickersSelector } from '../../selectors'
 import Table from 'react-immutable-table'
@@ -14,6 +15,8 @@ class Tickers extends PureComponent {
     super()
 
     this.handleClick = this.handleClick.bind(this)
+    this.onSearch = this.onSearch.bind(this)
+    this.renderConrols = this.renderConrols.bind(this)
   }
 
   componentDidMount () {
@@ -34,10 +37,21 @@ class Tickers extends PureComponent {
     this.props.currentSymbolChanged(symbol)
   }
 
+  renderConrols () {
+    return (
+      <span>
+        <button onClick={() => {}}>+</button>
+        <button onClick={() => {}}>-</button>
+      </span>
+    )
+  }
+
+  onSearch (filter) {
+    this.props.setFilter(filter)
+  }
+
   render () {
     const { tickers } = this.props
-
-    if (!tickers) return null
 
     return (
       <Table
@@ -45,7 +59,9 @@ class Tickers extends PureComponent {
         onClick={this.handleClick}
         title = 'Tickers'
         columns={['Name', 'Last', '24H', 'VOL BTC']}
-        count={tickers.size}
+        count={tickers ? tickers.size : 0}
+        // renderControls={this.renderConrols}
+        onSearch={this.onSearch}
       />
     )
   }
@@ -57,6 +73,7 @@ export default connect(
     fetchTickers: () => dispatch(fetchTickersAndSyncAction('tickers')),
     currentSymbolChanged: (symbol) => dispatch(currentSymbolChangedAction(symbol)), 
     stopTickersSync: () => dispatch(stopTickersSyncAction()),
-    emptyTickers: () => dispatch(emptyTickersAction()) 
+    emptyTickers: () => dispatch(emptyTickersAction()),
+    setFilter: (filter) => dispatch(setFilterAction({ tickers: filter })) 
   })
 )(Tickers)

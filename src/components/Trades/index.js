@@ -10,14 +10,12 @@ class Trades extends PureComponent {
   render () {
     const { trades, symbol } = this.props
 
-    if (!trades) return null
-
     return (
       <Table
         items={trades}
         title={`Trades ${parseSymbol(symbol, true)}`}
         columns={['Time', 'Amount', 'Price']}
-        count={trades.size}
+        count={trades ? trades.size : 0}
       />
     )
   }

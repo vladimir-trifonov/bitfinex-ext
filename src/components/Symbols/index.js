@@ -34,7 +34,7 @@ class Symbols extends PureComponent {
         items={symbols}
         onClick={this.handleClick}
         title = 'Symbols'
-        count={symbols.size}
+        count={symbols ? symbols.size : 0}
       />
     )
   }

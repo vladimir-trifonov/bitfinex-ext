@@ -10,14 +10,12 @@ class Book extends PureComponent {
   render () {
     const { book, symbol } = this.props
     
-    if (!book) return null
-    
     return (
       <Table
         items={book}
         title={`Order Book ${parseSymbol(symbol, true)}`}
         columns={['Price', 'Count', 'Amount']}
-        count={book.size}
+        count={book ? book.size : 0}
       />
     )
   }

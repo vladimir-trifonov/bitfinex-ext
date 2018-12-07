@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 import { parseSymbol } from '../utils'
 import { chunk } from '../utils'
 
-const getSymbols = (state) => state.symbols
+const getSymbols = ({ symbols }) => symbols
 
 export const getSymbolsSelector = createSelector(
   [ getSymbols ], 

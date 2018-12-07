@@ -9,6 +9,7 @@ export * from './tickers'
 export * from './trades'
 export * from './symbols'
 export * from './book'
+export * from './filters'
 export default { 
   tickersFetchedOkAction, 
   tradesUpdateReceivedAction, 
