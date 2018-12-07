@@ -31,7 +31,7 @@ class Book extends PureComponent {
         title={`Order Book ${parseSymbol(symbol, true)}`}
         columns={['Price', 'Count', 'Amount']}
         count={book ? book.size : 0}
-        renderControls={this.renderConrols}
+        // renderControls={this.renderConrols}
       />
     )
   }
