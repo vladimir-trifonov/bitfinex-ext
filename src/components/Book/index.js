@@ -7,6 +7,21 @@ import { parseSymbol } from '../../utils'
 import { withSubscription } from '../HOC'
 
 class Book extends PureComponent {
+  constructor () {
+    super()
+
+    this.renderConrols = this.renderConrols.bind(this)
+  }
+
+  renderConrols () {
+    return (
+      <span>
+        <button onClick={() => {}}>+</button>
+        <button onClick={() => {}}>-</button>
+      </span>
+    )
+  }
+  
   render () {
     const { book, symbol } = this.props
     
@@ -16,6 +31,7 @@ class Book extends PureComponent {
         title={`Order Book ${parseSymbol(symbol, true)}`}
         columns={['Price', 'Count', 'Amount']}
         count={book ? book.size : 0}
+        renderControls={this.renderConrols}
       />
     )
   }

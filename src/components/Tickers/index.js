@@ -16,7 +16,6 @@ class Tickers extends PureComponent {
 
     this.handleClick = this.handleClick.bind(this)
     this.onSearch = this.onSearch.bind(this)
-    this.renderConrols = this.renderConrols.bind(this)
   }
 
   componentDidMount () {
@@ -37,15 +36,6 @@ class Tickers extends PureComponent {
     this.props.currentSymbolChanged(symbol)
   }
 
-  renderConrols () {
-    return (
-      <span>
-        <button onClick={() => {}}>+</button>
-        <button onClick={() => {}}>-</button>
-      </span>
-    )
-  }
-
   onSearch (filter) {
     this.props.setFilter(filter)
   }
@@ -60,7 +50,6 @@ class Tickers extends PureComponent {
         title = 'Tickers'
         columns={['Name', 'Last', '24H', 'VOL BTC']}
         count={tickers ? tickers.size : 0}
-        // renderControls={this.renderConrols}
         onSearch={this.onSearch}
       />
     )
