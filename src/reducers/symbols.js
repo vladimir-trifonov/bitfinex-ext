@@ -4,4 +4,4 @@ import { List } from 'immutable'
 
 export const symbols = handleActions({
   [symbolsFetchedOkAction]: (symbols, { payload }) => List(payload)
-}, List([]))
+}, null)

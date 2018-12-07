@@ -5,7 +5,7 @@ import {
   currentSymbolChangedAction
 } from '../../actions'
 import { getSymbolsSelector } from '../../selectors'
-import Table from '../Table'
+import Table from 'react-immutable-table'
 
 class Symbols extends PureComponent {
   constructor () {

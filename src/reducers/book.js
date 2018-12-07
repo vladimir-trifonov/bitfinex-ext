@@ -1,12 +1,8 @@
 import { handleActions } from 'redux-actions'
 import { bookUpdateReceivedAction, emptyBookAction } from '../actions'
-import { List } from 'immutable'
+import { normalizeBookUpdate } from '../normalizers'
 
 export const book = handleActions({
-  [bookUpdateReceivedAction]: (book, { payload }) => {
-    if(Array.isArray(payload[1][0])) return List(payload[1])
-    return book
-    // return book.unshift(List(payload[1]))
-  },
-  [emptyBookAction]: () => List([])
-}, List([]))
+  [bookUpdateReceivedAction]: (book, { payload }) => normalizeBookUpdate(book, payload),
+  [emptyBookAction]: () => null
+}, null)

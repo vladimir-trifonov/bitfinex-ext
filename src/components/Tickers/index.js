@@ -7,7 +7,7 @@ import {
   emptyTickersAction
 } from '../../actions'
 import { getTickersSelector } from '../../selectors'
-import Table from '../Table'
+import Table from 'react-immutable-table'
 
 class Tickers extends PureComponent {
   constructor () {
@@ -17,7 +17,9 @@ class Tickers extends PureComponent {
   }
 
   componentDidMount () {
-    this.props.fetchTickers()
+    const { fetchTickers, emptyTickers } = this.props
+    emptyTickers()
+    fetchTickers()
   }
 
   componentWillUnmount () {
