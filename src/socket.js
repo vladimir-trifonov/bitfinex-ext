@@ -94,7 +94,6 @@ export default (emitter) => {
 
   w.onmessage = (msg) => {
     const data = JSON.parse(msg.data)
-    data.event && console.log(data)
     
     if (Array.isArray(data)) onData(data)
     else if(data.event === 'subscribed') onSubscribed(data)
