@@ -59,7 +59,7 @@ class Tickers extends PureComponent {
 export default connect(
   (state) => ({ tickers: getTickersSelector(state) }),
   (dispatch) => ({ 
-    fetchTickers: () => dispatch(fetchTickersAndSyncAction('tickers')),
+    fetchTickers: () => dispatch(fetchTickersAndSyncAction()),
     currentSymbolChanged: (symbol) => dispatch(currentSymbolChangedAction(symbol)), 
     stopTickersSync: () => dispatch(stopTickersSyncAction()),
     emptyTickers: () => dispatch(emptyTickersAction()),
