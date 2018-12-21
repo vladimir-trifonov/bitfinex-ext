@@ -1,5 +1,5 @@
 {
-  "name": "bitfinex",
+  "name": "bitfinex-ext",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
